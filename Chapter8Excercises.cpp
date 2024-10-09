@@ -2,9 +2,44 @@
 //
 
 #include "std_lib_facilities.h"
+
+class Name_pairs
+{
+public:
+	Name_pairs();
+	~Name_pairs();
+	void read_names();
+private:
+	vector<string> name;
+	vector<double> age;
+};
+
+Name_pairs::Name_pairs()
+{
+	read_names();
+}
+
+Name_pairs::~Name_pairs()
+{
+}
+void Name_pairs::read_names() {
+	cout << "input names, separate by enter. to finish input write ';'\n>";
+	string input;
+	while (cin>>input)
+	{
+		if (input != ";")
+		{
+			name.push_back(input);
+			cout << ">";
+		}
+		else {
+			return;
+		}
+	}
+}
 int main()
 {
-    
+	Name_pairs np;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
