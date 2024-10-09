@@ -9,6 +9,8 @@ public:
 	Name_pairs();
 	~Name_pairs();
 	void read_names();
+	void read_ages();
+	void print();
 private:
 	vector<string> name;
 	vector<double> age;
@@ -17,10 +19,13 @@ private:
 Name_pairs::Name_pairs()
 {
 	read_names();
+	read_ages();
+	print();
 }
 
 Name_pairs::~Name_pairs()
 {
+	cout << "k bye";
 }
 void Name_pairs::read_names() {
 	cout << "input names, separate by enter. to finish input write ';'\n>";
@@ -35,6 +40,30 @@ void Name_pairs::read_names() {
 		else {
 			return;
 		}
+	}
+}
+void Name_pairs::read_ages() {
+	cout << "now input age for each name\n";
+	double input;
+	for (int i = 0; i < name.size(); i++)
+	{
+		cout << name[i] << ": ";
+		cin >> input;
+		while (!cin.good())
+		{
+			cout<<"bad input\n" << name[i] << ": ";
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cin >> input;
+		}
+		age.push_back(input);
+
+	}
+}
+void Name_pairs::print() {
+	for (int i = 0; i < name.size(); i++)
+	{
+		cout << "name: " << name[i] << ", age: " << age[i]<<endl;
 	}
 }
 int main()
