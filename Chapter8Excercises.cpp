@@ -12,9 +12,10 @@ public:
 	void read_ages();
 	void print();
 	void sort_name_age();
-private:
 	vector<string> name;
 	vector<double> age;
+private:
+	
 };
 
 Name_pairs::Name_pairs()
@@ -22,12 +23,12 @@ Name_pairs::Name_pairs()
 	read_names();
 	read_ages();
 	sort_name_age();
-	print();
+	
 }
 
 Name_pairs::~Name_pairs()
 {
-	cout << "k bye";
+	cout << "k bye ";
 }
 void Name_pairs::read_names() {
 	cout << "input names, separate by enter. to finish input write ';'\n>";
@@ -83,10 +84,18 @@ void Name_pairs::sort_name_age() {
 		}
 	}
 }
+ostream& operator<<(ostream& os, Name_pairs np) {
+	for (int i = 0; i < np.name.size(); i++)
+	{
+		os << "name: " << np.name[i] << ", age: " << np.age[i] << endl;
+	}
+	return os;
+}
 
 int main()
 {
 	Name_pairs np;
+	cout << np;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
