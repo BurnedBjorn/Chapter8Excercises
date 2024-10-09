@@ -11,6 +11,7 @@ public:
 	void read_names();
 	void read_ages();
 	void print();
+	void sort_name_age();
 private:
 	vector<string> name;
 	vector<double> age;
@@ -20,6 +21,7 @@ Name_pairs::Name_pairs()
 {
 	read_names();
 	read_ages();
+	sort_name_age();
 	print();
 }
 
@@ -66,6 +68,22 @@ void Name_pairs::print() {
 		cout << "name: " << name[i] << ", age: " << age[i]<<endl;
 	}
 }
+void Name_pairs::sort_name_age() {
+	vector<string> name_orig = name;
+	vector<double> age_orig = age;
+	sort(name.begin(), name.end());
+	for (int i = 0; i < name.size(); i++)
+	{
+		for (int ii = 0; ii < name_orig.size(); ii++)
+		{
+			if (name[i]==name_orig[ii])
+			{
+				age[i] = age_orig[ii];
+			}
+		}
+	}
+}
+
 int main()
 {
 	Name_pairs np;
