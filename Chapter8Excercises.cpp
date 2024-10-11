@@ -37,8 +37,16 @@ void Name_pairs::read_names() {
 	{
 		if (input != ";")
 		{
-			name.push_back(input);
-			cout << ">";
+			bool repeats = false;
+			for (int i = 0; i < name.size(); i++)
+			{
+				if (input == name[i]) { repeats = true; }
+			}
+			if (repeats) { cout << "name already in database, try another one\n>";}
+			else {
+				name.push_back(input);
+				cout << ">";
+			}
 		}
 		else {
 			return;
@@ -80,6 +88,7 @@ void Name_pairs::sort_name_age() {
 			if (name[i]==name_orig[ii])
 			{
 				age[i] = age_orig[ii];
+				
 			}
 		}
 	}
