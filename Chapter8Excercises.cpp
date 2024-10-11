@@ -3,6 +3,85 @@
 
 #include "std_lib_facilities.h"
 
+class Name_pairs2 {
+public:
+	Name_pairs2();
+	struct Name_pair
+	{
+		string name;
+		double age = 0;
+		Name_pair(string n, double d) :name{ n }, age{ d } {};
+		Name_pair(string n) :name{ n }, age{ 0 } {};
+		bool operator<(const Name_pair& pair) const
+		{
+			return (name + to_string(age)) < (pair.name + to_string(pair.age));
+		}
+
+		
+	};
+	void read_names();
+	void read_ages();
+	void sort_pairs();
+	vector<Name_pair> get_pairs()const { return pairs; }
+private:
+	vector<Name_pair> pairs;
+	
+};
+Name_pairs2::Name_pairs2()
+{
+	read_names();
+	read_ages();
+	sort_pairs();
+}
+void Name_pairs2::read_names()
+{
+	cout << "input names, separate by enter. to finish input write ';'\n>";
+	string input;
+	while (cin >> input)
+	{
+		if (input != ";")
+		{
+			pairs.push_back(input);
+			cout << ">";
+		}
+		else {
+			return;
+		}
+	}
+}
+
+void Name_pairs2::read_ages()
+{
+	cout << "now input age for each name\n";
+	
+	double input;
+	for (int i = 0; i < pairs.size(); i++)
+	{
+		cout << pairs[i].name << ": ";
+		cin >> input;
+		while (!cin.good())
+		{
+			cout << "bad input\n" << pairs[i].name << ": ";
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cin >> input;
+		}
+		pairs[i].age = input;
+
+	}
+}
+
+void Name_pairs2::sort_pairs() {
+	sort(pairs.begin(), pairs.end());
+}
+ostream& operator<<(ostream& os, const Name_pairs2& np2) {
+	for (int i = 0; i < np2.get_pairs().size(); i++)
+	{
+		os << "name: " << np2.get_pairs()[i].name << ", age: " << np2.get_pairs()[i].age << endl;
+	}
+	return os;
+}
+/*
 class Name_pairs
 {
 public:
@@ -100,11 +179,11 @@ ostream& operator<<(ostream& os, Name_pairs np) {
 	}
 	return os;
 }
-
+*/
 int main()
 {
-	Name_pairs np;
-	cout << np;
+	Name_pairs2 np2;
+	cout << np2;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
